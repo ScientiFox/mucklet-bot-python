@@ -16,7 +16,9 @@ Additionally, four test and demonstration bots are included, illustrating usage 
 This module requires credentials for Wolfery.com to operate. In 'Mucklet_Python_Bot_V03.py' are three variables to provide these credentials- remember to strip yours out of the script before sharing your code!
 
 USER takes a user account name, exactly as it appears in the settings.
+
 PASS takes the SHA256 hash of the account password, padded with a trailing '=', https://approsto.com/sha-generator/ includes a tool to generate this hash.
+
 HASH takes anHMAC-SHA256 code of the account password, peppered with 'TheStoryStartsHere'
 
 Further, it presumes the existence of a character intended to be controlled as a bot (unlike Anisus' mucklet-bot, which will attempt to create a character).
