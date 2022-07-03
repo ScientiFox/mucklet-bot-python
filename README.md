@@ -11,7 +11,7 @@ Note that while it is derived from https://github.com/anisus/mucklet-bot, it doe
 
 Additionally, four test and demonstration bots are included, illustrating usage of the main package.
 
-##Usage
+#Usage
 
 This module requires credentials for Wolfery.com to operate. In 'Mucklet_Python_Bot_V03.py' are three variables to provide these credentials- remember to strip yours out of the script before sharing your code!
 
@@ -36,7 +36,7 @@ CHAR_TARGET takes this ID in both cases. The main application displays the logge
 
 Starting a specific bot only requires to start a thread with the primary control script associated with that bot as the thread target. All the maintenence work (keep awake pings, event handling, etc.) is handled by the bot object.
 
-##Making bots
+#Making bots
 
 Every bot will need to take a 'player' argument, which allows it to access the API management systems in the main module. Other arguments can be provided as well, as illustrated by the 'command_bot' process.
 
