@@ -19,7 +19,7 @@ USER takes a user account name, exactly as it appears in the settings.
 
 PASS takes the SHA256 hash of the account password, padded with a trailing '=', https://approsto.com/sha-generator/ includes a tool to generate this hash.
 
-HASH takes anHMAC-SHA256 code of the account password, peppered with 'TheStoryStartsHere'
+HASH takes anHMAC-SHA256 code of the account password, peppered with 'TheStoryStartsHere', https://www.devglan.com/online-tools/hmac-sha256-online includes a tool to generate this hash.
 
 Further, it presumes the existence of a character intended to be controlled as a bot (unlike Anisus' mucklet-bot, which will attempt to create a character).
 
