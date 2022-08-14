@@ -69,7 +69,7 @@ For instance, say inside of `my_bot`, you had a main function you would like the
 
 In this dictionary, the key (`'function'`, in this case) is the primary thing that has to be present in your command message to the bot for it to start this module.
 
-`'phrases'` can be one of two things- if it is not empty, it is additional text that must be somewhere in the command for the bot to run (so in this example, `&function run` and `&do function` would both start the module, but `&function` would not), if it is left empty, as `'phrases':[]`, then everything after the keyphrase will be fed to the module as a text string argument in the bot object variable `subprocess_flags['command args']` which can be accessed by the module (see the `say_cmd` and corresponding `say_it` module in `utility_bots` for an example of this usage)
+`'phrases'` can be one of two things- if it is not empty, it is additional texts that at east one of must be somewhere in the command for the bot to run (so in this example, `&function run` and `&do function` would both start the module, but `&function` would not), if it is left empty, as `'phrases':[]`, then everything after the keyphrase will be fed to the module as a text string argument in the bot object variable `subprocess_flags['command args']` which can be accessed by the module (see the `say_cmd` and corresponding `say_it` module in `utility_bots` for an example of this usage)
 
 `'eng'` is a plain text description of the module for the 'help' function when it needs to ask for a clarification for an uninterpreted commmand.
 
