@@ -3,6 +3,7 @@ import json
 import threading
 import math,time,random
 import pickle,glob
+import hashlib,codecs,hmac
 
 '''
 Implementation of the Mucklet API for building bots in python.
@@ -14,17 +15,26 @@ send with Resgate formatting.
 The rest is implementing two parts- the bot and bot character classes,
 the former holding the top-level stuff like authentication, the latter
 managing the specific stuff for the character autonomously controlled.
+
 '''
 
-#Wolfery connection params
-HOST = 'wss://api.wolfery.com'
-ORIGIN = 'https://wolfery.com'
+from config_bot import *
 
-#User Login stuff
-USER = "" #Account name
-PASS = "" #SHA256 base64 hash (pad w/ '=')- https://approsto.com/sha-generator/
-HASH = "" #HMAC-SHA256 hash w/ 'TheStoryStartsHere'- https://www.devglan.com/online-tools/hmac-sha256-online
-BOT_NAME = ("<name>","<surname>") #First and surname of the character to make the bot
+pepper = "TheStoryStartsHere"
+
+m = hashlib.sha256()
+m.update(bytes(password,'UTF-8'))
+hx = m.hexdigest()
+PASS = codecs.encode(codecs.decode(hx, 'hex'), 'base64').decode()[:-1]
+
+hx = hmac.new(bytes(pepper,'UTF-8'),msg=bytes(password,'UTF-8'), digestmod = hashlib.sha256).hexdigest()
+HASH = codecs.encode(codecs.decode(hx, 'hex'), 'base64').decode()[:-1]
+
+BOT_NAME = (bt_name,bt_surname)
+
+print("USER:",USER)
+print("PASS:",PASS)
+print("HASH:",HASH)
 
 #_sendNow IDs- for tracking replies by type
 LOGIN = 1
@@ -93,6 +103,9 @@ class bot:
 
         #Place for a bot to save some sort of observational data to
         self.save_data = None
+
+        #Passable generic flag system for subprocess control
+        self.subprocess_flags = {}
 
     def set_ws(self,_ws):
         #Attach the websocket- done after ws is initialized w/
@@ -313,6 +326,7 @@ class bot:
                 typ = msg['data']['type'] #message type
                 cont = msg['data']['msg'] #contents of message
                 name = msg['data']['char']['name'] + " " + msg['data']['char']['surname'] #Name of actor
+                ID = msg['data']['char']['id']
 
                 if typ == 'say':
                     #Add 'say' for these
@@ -320,11 +334,23 @@ class bot:
                     pass
                 elif typ in ['pose','sleep','travel','leave','arrive','wakeup']:
                     #Just print the rest of the notices
+
+                    #A check to see if the bot has traveled
+                    if typ == 'travel' and ID == self.bot_char.cid:
+                        if 'travel_counter' in self.subprocess_flags:
+                            self.subprocess_flags['travel_counter'] = self.subprocess_flags['travel_counter'] + 1
+                        else:
+                            self.subprocess_flags['travel_counter'] = 1
+
                     print(name + ": "+cont)
                     pass
                 elif typ == 'whisper':
                     print(name+" whispers: "+cont)
                     pass
+                elif typ == 'ooc':
+                    print(name+" says ooc: "+cont)
+                    pass
+
 
                 #Message and addresses are specific to the bot, so they get saved
                 #   in queues for processing
@@ -332,7 +358,7 @@ class bot:
                     #If for the bot character and not already saved
                     if msg['data']['target']['id'] == self.bot_char.cid and not(msg['data']["id"] in self.bot_char.msg_ids):
                         #Save the message itself
-                        self.bot_char.msg_hist = [msg] + self.bot_chat.msg_hist
+                        self.bot_char.msg_hist = [msg] + self.bot_char.msg_hist
                         #Mark the mesage as saved
                         self.bot_char.msg_ids[msg['data']['id']] = None
                         #Print it
@@ -495,61 +521,5 @@ class char:
         _sendNow(self.player.ws,method,params={},ind=PING)
 
 
-########
-#Main segment for starting the bot running
-########
-
-#Import the files containing the bots' run functions
-from alert_bot import *
-from command_executing_bot import *
-from mapping_bot import *
-from demo_function_bot import *
-
-if __name__ == '__main__':
-
-    #Make the main bot
-    a_bot = bot()
-
-    #Build the websocket w/ bot methods as callbacks
-    #websocket.enableTrace(True)
-    ws = websocket.WebSocketApp(HOST
-                                ,on_message = a_bot.on_message
-                                ,on_error   = a_bot.on_error
-                                ,on_close   = a_bot.on_close
-                                ,on_open    = a_bot.on_open)
-
-    #Attach the full WS to the bot
-    a_bot.set_ws(ws)
-
-    #Boot thread
-    boot_thread = threading.Thread(target=a_bot.boot, args=())
-    boot_thread.start()
-
-    #Keepawake thread- ping once every 25 seconds
-    keep_awake_thread = threading.Thread(target=a_bot.keepAwake, args=(25.0,))
-    keep_awake_thread.start()
-
-    #Start up the control thread- determines which bot to run:
-    '''
-    For the initial demo:
-    ctrl_thread = threading.Thread(target=timed_process, args=(a_bot,))
-
-    For the alert bot:
-    ctrl_thread = threading.Thread(target=alert_bot, args=(a_bot,))
-
-    For the command-executing bot:  [Note- it uses the COMMAND argument]
-    ctrl_thread = threading.Thread(target=command_bot, args=(a_bot,COMMANDS,))
-
-    For the mapper bot:
-    ctrl_thread = threading.Thread(target=mapping_bot, args=(a_bot,))
-    '''
-    ctrl_thread = threading.Thread(target=command_bot, args=(a_bot,COMMANDS,))
-    #ctrl_thread = threading.Thread(target=timed_process, args=(a_bot,))
-    #ctrl_thread = threading.Thread(target=alert_bot, args=(a_bot,))
-    #ctrl_thread = threading.Thread(target=mapping_bot, args=(a_bot,))
-    ctrl_thread.start()
-
-    #Fire up the websocket
-    ws.run_forever(origin=ORIGIN)
 
         
