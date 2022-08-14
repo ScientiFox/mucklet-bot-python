@@ -1,0 +1,125 @@
+espresso
+espresso
+pours
+mug
+
+coffee
+coffee
+pours
+mug
+
+americano
+espresso
+water
+pours
+mug
+
+cappucino
+espresso
+steamed milk
+pours
+mug
+
+latte
+espresso
+steamed milk
+milk foam
+pours
+mug
+
+flat white
+espresso
+frothed cream
+pours
+mug
+
+macchiato
+espresso
+frothed milk
+blends
+mug
+
+cortado
+espresso
+steamed milk
+pours
+mug
+
+breve
+espresso
+cream
+mixes
+mug
+
+cafe au lait
+coffee
+hot milk
+pours
+mug
+
+cafe con leche
+coffee
+steamed milk
+pours
+mug
+
+mocha
+espresso
+steamed milk
+chocolate syrup
+pours
+mug
+
+frappe
+espresso 
+mixes
+mug
+
+cold brew
+coffee
+pours
+mug
+
+iced coffee
+coffee
+ice
+pours
+mug
+
+iced latte
+espresso
+milk
+ice
+pours
+mug
+
+iced espresso
+espresso
+ice
+pours
+mug
+
+iced americano
+espresso
+ice
+water
+pours
+mug
+
+iced cappuccino
+espresso
+steamed milk
+ice
+pours
+mug
+
+red eye
+espresso
+coffee
+pours
+mug
+
+coffee
+coffee
+pours
+mug

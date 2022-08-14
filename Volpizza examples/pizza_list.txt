@@ -1,0 +1,165 @@
+﻿
+mushroom and pepperoni
+tomato sauce, Mozzarella, mushrooms, pepperoni
+
+meat lover
+tomato sauce, Mozzarella, sausage, bacon, pepperoni
+
+steak
+-Flame-grilled steak
+
+steak  rare
+-Steak, cooked rare
+
+rare steak
+-Steak, cooked rare
+
+steak  medium
+-Steak, cooked medium
+
+medium, steak
+-Steak, cooked medium
+
+steak  well
+-Steak, well-done
+
+well steak
+-Steak, well-done
+
+steak  well done
+-Steak, well-done
+
+well done steak
+-Steak, well-done
+
+cheese
+tomato sauce, Mozzarella
+
+cheeze
+tomato sauce, Mozzarella
+
+sausage
+tomato sauce, Mozzarella, sausage
+
+bacon
+tomato sauce, Mozzarella, bacon
+
+vegetarian
+peppers, olives, tomatoes, mushrooms, spinach
+
+veggie
+peppers, olives, tomatoes, mushrooms, spinach
+
+Broccoli	
+Tomatoes, Ricotta, Broccoli, Spinach
+
+Buffalo Chicken	
+Hot sauce, Monterey Jack cheese, Blue cheese, Chicken breast cutlets, Spring onions, Olive oil
+
+California Style	
+Ricotta, Red peppers, Mustard, Pat
+
+Carolina Reaper	
+Tomato sauce, Cheese, Carolina Reaper chili peppers
+
+Cheeseburger Style	
+Tomatoes, Cheese sauce, CheeseGround beef, Lettuce, Bacon, Pickles
+
+Cheesy Crust 
+Crispy and crunchy crust, Spicy sauce, Salami
+
+Stuffed Crust
+Tomato sauce, Mozzarella, Cheese baked into the edge of the crust
+
+Chicago Style 
+Cheese, Tomato sauce
+
+Deep-Dish 	
+Cheese, Tomato sauce
+
+Chicago Thin Crust  
+Crispy and crunchy crust, Spicy sauce, Salami
+
+Tavern Cut
+Crispy and crunchy crust, Spicy sauce, Salami
+
+Chicken Alfredo
+Butter, Garlic, Onion, Grilled shredded chicken, Heavy cream, Milk, Parmesan, Mozzarella, Olive oil, Ground black pepper or white pepper, Green Onions
+
+Detroit Style	
+Deep-dish crust with caramelized crunchy edges, Marinara sauce
+
+Greek Style 	
+Tomato sauce, Mozzarella, Feta, Kalamat olives, Fresh tomatoes, Oregano
+
+Habanero
+Tomato sauce, Cheese, Habanero peppers
+
+Hawaiian
+Tomato sauce, Cheese, Pineapple, Ham
+
+Mac and Cheese	
+Macaroni, Cheddar, Mozzarella
+
+Meatball	
+Tomato sauce, Cheese, Salami, Meatballs
+
+New York Style 
+Tomato sauce, Mozzarella, Oregano, Chili flakes on thin crust
+
+Ohio Valley	
+Tomato sauce, Grated mozzarella, Peperoni salami 
+
+Old Forge	
+Sweet tomato sauce, Onions, Mozzarella, Cheddar 
+
+Sicilian	
+Tomato sauce and cheese on thick crust
+
+Stromboli	
+Tomato sauce, Mozzarella, Salami, Ham and vegetables
+
+Tropical	
+Pineapple cream, Mozzarella, Lime, Mango, Shrimps, Parsley
+
+Marinara	
+Marinara sauce, Garlic, Olive oil, Basil, Oregano
+
+Margherita	
+San Marzano tomato sauce, Mozzarella di bufala, Olive Oil
+
+Anchovy
+Tomato Sauce, Mozzarella, Anchovies, Garlic, Hot chili peppers
+
+Bolognese	
+Bolognese sauce, Mozzarella
+
+Caprese	
+Tomato sauce, Mozarella, Cherry tomatoes
+
+Capri	
+Tomato sauce, Mozzarella, Arugula, Cherry tomatoes, Parmigiano Reggiano
+
+Carbonara	
+Pecorino Romano Cheese, Heavy cream, Scallions, Eggs, Black pepper
+
+Funghi	
+Tomato Sauce, Mozzarella, Fresh mushrooms
+
+Margherita	
+Tomato sauce, Mozzarella, Olive oil, Basil leaves
+
+Marinara
+Marinara sauce, Garlic, Olive oil, Basil, Oregano
+
+Mozzarella	
+Tomato Sauce, Buffalo mozzarella
+
+Pepperoni	
+Tomato sauce, Mozzarella, Pepperonis
+
+Prosciutto	
+Tomato sauce, Mozzarella, Prosciutto
+
+Spinach	
+Tomato sauce, Mozzarella, Spinach, Salt, Pepper, Olive oil
