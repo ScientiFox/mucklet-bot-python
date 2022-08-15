@@ -17,6 +17,7 @@ from difflib import SequenceMatcher
 
 from utility_bots import *
 from navigation_bots import *
+from talkbot import *
 
 time_cmd = {'time': #Key phrase for the command- must be present
                 {'phrases':['tell', 'what'], #secondary phrases- at least one must be present
@@ -139,6 +140,14 @@ spin_bottle_cmd = {'spin':
                 }
             }
 
+chat_cmd = {'chat':
+                {'phrases':['start','bot'],
+                'eng':'Run the chat bot?',
+                'function':talk_bot,
+                'description':"Run the chat bot- &start chat bot"
+                }
+            }
+
 #List of the commands to go into the main bot controller
 COMMANDS = [time_cmd,
             go_cmd,
@@ -154,7 +163,8 @@ COMMANDS = [time_cmd,
             say_code_cmd,
             timer_cmd,
             spin_bottle_cmd,
-            say_gal_cmd
+            say_gal_cmd,
+            chat_cmd
             ]
 
 def command_bot(player,commands,_key_phrase="&"):
