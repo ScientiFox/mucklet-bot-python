@@ -607,7 +607,7 @@ def time_since_train(player):
 
     tmes = [(days," day"),(hrs," hour"),(mins," minute")]
 
-    S = "You woke up on the train "
+    S = "I woke up on the train "
     for a in tmes:
         S = S + str(a[0]) + a[1] + "s"*(a[0]>1) + ", "
     S = S + "and " + str(secs) + " second" + "s"*(secs>1) + " ago."

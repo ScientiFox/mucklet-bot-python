@@ -68,11 +68,49 @@ class talker:
         self.kern.setBotPredicate("species",self.species)
         self.kern.setBotPredicate("birthday",self.birthday)
 
+        self.kern.setBotPredicate("religion","Deekultist")
+        self.kern.setBotPredicate("favoritefood","electricity")
+        self.kern.setBotPredicate("location","Sinder, the Rift")
+        self.kern.setBotPredicate("master","Fox Lancaster-Okamimi")
+        self.kern.setBotPredicate("genus","robot")
+        self.kern.setBotPredicate("order","artificial intelligence")
+        self.kern.setBotPredicate("favoritecolor","blue")
+
         #char_id : ["cont",time_recv]
         self.char_buffers = {}
 
-        self.resp_delay = 10.0
-        self.join_delay = 5.0
+        self.resp_delay = 6.0
+        self.join_delay = 2.5
+
+        print("Bot Predicates:")
+        for a in self.kern._botPredicates.keys():
+            print(a)
+
+        print("Session Predicates:")
+        for a in self.kern._sessions.keys():
+            print(a)
+            for b in self.kern._sessions[a]:
+                print(b)
+
+    def save_sessions(self):
+        ses_set = self.kern._sessions
+        self.kern.saveBrain("bot_chatter_brain.brn")
+        f = open("bot_learned.chbot",'wb')
+        pickle.dump(ses_set,f)
+        f.close()
+
+    def load_sessions(self,fle):
+        f = open(fle,'rb')
+        ses_set = pickle.load(f)
+        f.close()
+        self.kern._sessions = ses_set
+
+        print("Session Predicates:")
+        for a in self.kern._sessions.keys():
+            print(a)
+            for b in self.kern._sessions[a]:
+                print(b,self.kern._sessions[a][b])
+        
 
     def add_addr(self,addr,target):
         if target in self.char_buffers.keys():
@@ -121,7 +159,7 @@ class talker:
         to_resp_to.sort(key = lambda x:x[1])
         op_replies = []
         for addr in to_resp_to:
-            op_resp = self.kern.respond(addr[0])
+            op_resp = self.kern.respond(addr[0],addr[2])
             if op_resp != '':
                 op_replies = op_replies + [(op_resp,addr[2])]
             else:
@@ -154,10 +192,16 @@ def talk_bot(player):
     #Turn the bot loop on
     player.subprocess_flags['chatter'] =  True
 
-    bot_chat_engine = talker(player)
+    bot_file = glob.glob("*.chbot")
+
+    if bot_file == []:
+        bot_chat_engine = talker(player)
+    else:
+        bot_chat_engine = talker(player)
+        bot_chat_engine.load_sessions(bot_file[0])
 
     #Mode start-up message
-    ALERT_MSG = "I am the talky bot, I talk."
+    ALERT_MSG = "I am the talky bot, speak to me with @"+player.bot_char.char_models["core.char."+player.bot_char.cid+".owned"]['name'] + "= What you'd like to say"
     player.bot_char.say(ALERT_MSG)
 
     #Main loop
@@ -177,7 +221,7 @@ def talk_bot(player):
                 if cont_m == 'stop':
                     #Stop the loop
                     player.subprocess_flags['chatter'] = False
-                    bot_chat_engine.kern.saveBrain("bot_chatter_brain.brn")
+                    bot_chat_engine.save_sessions()
                 else:
                     pass
             else:
