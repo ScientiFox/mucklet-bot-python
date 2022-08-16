@@ -334,7 +334,7 @@ def exploration_bot(player):
         if not(inRoom in rooms):
             #Add a new room to the map
             rooms[inRoom] = roomExits
-            rooms[inRoom] = roomName
+            names[inRoom] = roomName
             player.subprocess_flags['main_map'] = [rooms,exits,names]
             
 
