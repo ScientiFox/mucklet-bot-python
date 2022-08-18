@@ -13,12 +13,13 @@ import aiml #THIS MODULE REQUIRES AIML PACKAGE
 
 #Some things to do while idling
 FLAVOR = [":stands around",
-          ":silently talked to itself",
+          ":silently talks to itself",
           ":whistles awkwardly",
           ":rubs its face",
           ":coughs politely into its hand",
           ":rubs its cheek",
           ":yawns",
+          ":says \"You are now breathing manually\"",
           ":stretches"
           ]
 
@@ -86,11 +87,11 @@ class talker:
         for a in self.kern._botPredicates.keys():
             print(a)
 
-        print("Session Predicates:")
-        for a in self.kern._sessions.keys():
-            print(a)
-            for b in self.kern._sessions[a]:
-                print(b)
+        #print("Session Predicates:")
+        #for a in self.kern._sessions.keys():
+        #    print(a)
+        #    for b in self.kern._sessions[a]:
+        #        print(b)
 
     def save_sessions(self):
         ses_set = self.kern._sessions
@@ -105,11 +106,11 @@ class talker:
         f.close()
         self.kern._sessions = ses_set
 
-        print("Session Predicates:")
-        for a in self.kern._sessions.keys():
-            print(a)
-            for b in self.kern._sessions[a]:
-                print(b,self.kern._sessions[a][b])
+        #print("Session Predicates:")
+        #for a in self.kern._sessions.keys():
+        #    print(a)
+        #    for b in self.kern._sessions[a]:
+        #        print(b,self.kern._sessions[a][b])
         
 
     def add_addr(self,addr,target):
@@ -201,8 +202,18 @@ def talk_bot(player):
         bot_chat_engine.load_sessions(bot_file[0])
 
     #Mode start-up message
-    ALERT_MSG = "I am the talky bot, speak to me with @"+player.bot_char.char_models["core.char."+player.bot_char.cid+".owned"]['name'] + "= What you'd like to say"
+    ALERT_MSG = "I am the talky bot, speak to me with `@"+player.bot_char.char_models["core.char."+player.bot_char.cid+".owned"]['name'] + "= What you'd like to sayto me`"
     player.bot_char.say(ALERT_MSG)
+
+    announce_timer = time.time()
+    announce_period = 150.0
+    state,S = player.bot_char.getState()
+    char_list = state[2]
+    awake_list = []
+    for a in char_list:
+        if a['state'] == 'awake':
+            awake_list = awake_list + [a]
+    char_list = awake_list+[]
 
     #Main loop
     while player.subprocess_flags['chatter']:
@@ -287,4 +298,21 @@ def talk_bot(player):
             #print("ADD MSG:",op)
             message_queue = [op] + message_queue
 
+        state,S = player.bot_char.getState()
+        new_chars = state[2]
+        awake_list = []
+        for a in new_chars:
+            if a['state'] == 'awake':
+                awake_list = awake_list + [a]
+        new_chars = awake_list+[]
 
+        ids_old = [a['id'] for a in char_list]
+        n_new = 0
+        for char in new_chars:
+            if not(char['id'] in ids_old): 
+                n_new+=1
+        if n_new>0 and time.time()-announce_timer > announce_period:
+            message_queue = [(ALERT_MSG,None)] + message_queue
+            announce_timer = time.time()
+            message_timer = time.time()
+        char_list = new_chars + []
