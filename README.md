@@ -79,7 +79,7 @@ Finally, `'description'` is an english description of the module, which requires
 
 One this dictionary is created, you can add it to the `COMMANDS` list in `command_executing_bot.py`, which makes it available for scanning by the main process, and makes the module availble to execute.
 
-To actually write your own bot, the `bot_template.py` script is included as a starting point. As written, the sole function within, `demo_bot`, can be added to the `command_executing_bot` pipeline as described above, or run independently, thus providing an example of how you may also write your own stand alone bot as well. Note that if run stand alone, it will immediately start up with its own functionality, and when terminated the process will stop (in `command_executing_bot`, when one module is terminated, another may be started using the command interface).
+To actually write your own bot, the `bot_template.py` script is included as a starting point. As written, the sole function within, `demo_bot`, can be added to the `command_executing_bot` pipeline as described above, or run independently, thus providing an example of how you may also write your own stand alone bot as well. Note that if run stand alone, it will immediately start up with its own functionality, and when terminated the process will stop (in `command_executing_bot`, when one module is terminated using `msg bot char=stop` another may be started using the command interface).
 
 This script implements all the basics needed to run a bot using the same standards as in the rest of the included modules, including the basic imports needed to use the `Mucklet_Python_Bot_V03` module for managing the API and the utility_bots package, which includes several fundamental functions.
 
