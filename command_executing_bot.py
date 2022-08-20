@@ -217,7 +217,9 @@ def command_bot(player,commands,_key_phrase="&"):
         if get_help:
             S = "\n"+"For using me:" + "\n"
             S = S + "  *for politeness, I respond to either @ or msg (set by comm mode)" + "\n"
-            S = S + "  *preface commands with & (for now!)" + "\n"
+            S = S + "  *preface commands with `"+key_phrase+"` (for now!)" + "\n"
+            S = S + "  *Terminate operation of a module with `msg "+player.bot_char.char_models["core.char."+player.bot_char.cid+".owned"]['name']+" "+player.bot_char.char_models["core.char."+player.bot_char.cid+".owned"]['surname']+": stop` \n"
+
             S = S + "__Current Commands:__"+"\n"
             for cmd in commands: #Add the list of names and descriptions
                 desc = cmd[list(cmd.keys())[0]]['description'].split("-")
